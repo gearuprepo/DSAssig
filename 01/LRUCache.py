@@ -89,7 +89,7 @@ class LRU_Cache:
                 previous = head
                 head = head.next
 
-# TEsting
+# Testing
 
 our_cache = LRU_Cache(5)
 
