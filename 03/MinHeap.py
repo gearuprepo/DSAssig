@@ -12,13 +12,11 @@ class Node:
 
 class MinHeap:
     def __init__(self,initial_size):
-        print("Initi")
         self.container = [None for _ in range(initial_size)]
         self.current = 0
         self.maxchild = 2 #2 For Binary representation
 
     def push(self,element):
-        print("Insert")
         self.container[self.current] = element
         #Find out parent location
         if self.current > 0: # For the element from index 1
@@ -35,10 +33,6 @@ class MinHeap:
                 #store in left
                 parentNode.left = element
                 parentNode.leftIndex = self.current
-            print("Parent Details")
-            print(str(parentIndex))
-            #print(parentNode.key)
-            print("-------------")
         self.current += 1
     def pop(self):
         print("Pop")
@@ -47,23 +41,24 @@ class MinHeap:
         print("heapify")
 
     def print(self):
-        print("print")
         cnt = 0
         for ele in self.container:
             if ele != None:
-                print(str(cnt) +" : "+ele.key +" : "+str(ele.value))
-                if ele.parentIndex != None:
-                    print("Parent : "+str(ele.parentIndex))
-                if ele.leftIndex != None:
-                    print("Left : "+str(ele.leftIndex))
-                if ele.rightIndex != None:
-                    print("Right : "+str(ele.rightIndex))
+                par = self.printhelp(ele.parentIndex)
+                lt = self.printhelp(ele.leftIndex)
+                rt = self.printhelp(ele.rightIndex)
+                print(str(cnt) +" : "+ele.key +" : "+str(ele.value)+", Parent : "+par+", Left : "+lt+", Right : "+rt)
+
+    def printhelp(self,input):
+        par = None
+        if input!= None:
+            par = str(input)
+        return str(par)
 
 if __name__ == "__main__":
-    length = 16
+    length = 160
     minheap = MinHeap(length)
     for i in range(0,length):
-        print(str(i))
         node = Node("Key"+str(i),i)
         minheap.push(node)
     minheap.print()
