@@ -1,16 +1,4 @@
 import sys
-from collections import Counter
-
-class Node:
-    def __init__(self,  value,freq):
-        self.value = value
-        self.freq = freq
-        self.left = None
-        self.right = None
-
-class PriorityQueue:
-    def __init__(self):
-
 
 class HuffCode:
     def __init__(self):
@@ -23,6 +11,14 @@ class HuffCode:
             this.freqmap[char] = this.freqmap.get(char, 0) + 1
         print(this.freqmap)
         # Construct priority queue for frequency map
+        minheap = MinHeap(len(this.freqmap))
+        for ele in this.freqmap:
+            print("Inloop" + str(ele))
+            minheap.insert(ele)
+        minheap.print()
+        minheap.minHeap()
+        print("--------------")
+        minheap.print()
         # Encode tree process
         # encode data
         pass
