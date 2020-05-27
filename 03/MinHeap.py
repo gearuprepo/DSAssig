@@ -17,7 +17,6 @@ class MinHeap:
         self.maxchild = 2 #2 For Binary representation
 
     def push(self,element):
-        print("-----end push--------"+str(element.key))
         self.container[self.current] = element
         #Construct Tree in parallel using LL
         rtflag = False
@@ -42,11 +41,14 @@ class MinHeap:
 
     #Needs optimization. Currently using this
     def pop(self):
+        print("Pop")
         retval = self.container[0]
         tempHeap = MinHeap(len(self.container))
         loopcontainer = self.container[1:len(self.container)]
         for ele in loopcontainer:
-            tempHeap.push(ele)
+            if ele!=None:
+                newnode = Node(ele.key,ele.value)
+                tempHeap.push(newnode)
         self.container = tempHeap.container
         return retval
 

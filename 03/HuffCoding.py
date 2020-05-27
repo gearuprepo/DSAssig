@@ -1,5 +1,8 @@
 #Huffman Coding
 import sys
+sys.path.append(".")
+from MinHeap import MinHeap
+from MinHeap import Node
 class HuffCode:
     def __init__(self):
         self.freqmap = dict()
@@ -10,16 +13,18 @@ class HuffCode:
         for char in data:
             this.freqmap[char] = this.freqmap.get(char, 0) + 1
         print(this.freqmap)
+
         # Construct priority queue for frequency map
         minheap = MinHeap(len(this.freqmap))
         for ele in this.freqmap:
-            print("Inloop" + str(ele))
-            minheap.insert(ele)
+            minheap.push(Node(str(ele),str(this.freqmap.get(ele))))
         minheap.print()
-        minheap.minHeap()
-        print("--------------")
-        minheap.print()
+
         # Encode tree process
+        size = len(minheap.container)
+        for ele in range(size):
+            minheap.pop()
+            minheap.print()
         # encode data
         pass
 
