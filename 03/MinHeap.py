@@ -31,6 +31,10 @@ class MinHeap:
             else:
                 parentNode.left = element
                 parentNode.leftIndex = self.current
+        pointer = self.current
+        while self.container[pointer].parentIndex!=None and (self.container[pointer].value < self.container[pointer].parent.value):
+            pointer = self.compareandswap(pointer)
+
         self.current += 1
     def pop(self):
         print("Pop")
@@ -59,6 +63,7 @@ class MinHeap:
         self.container[elementindex] = newParentBecomesChild
         self.container[parentIndex] = newChildBecomesParent
 
+        return parentIndex
 
     def print(self):
         cnt = 0
