@@ -1,5 +1,5 @@
+#Huffman Coding
 import sys
-
 class HuffCode:
     def __init__(self):
         self.freqmap = dict()
