@@ -43,7 +43,7 @@ class MinHeap:
     def pop(self):
         print("Pop")
         retval = self.container[0]
-        tempHeap = MinHeap(len(self.container))
+        tempHeap = MinHeap(len(self.container)-1)
         loopcontainer = self.container[1:len(self.container)]
         for ele in loopcontainer:
             if ele!=None:

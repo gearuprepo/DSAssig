@@ -22,8 +22,9 @@ class HuffCode:
 
         # Encode tree process
         size = len(minheap.container)
-        for ele in range(size):
+        while size>0:
             minheap.pop()
+            size = len(minheap.container)
             minheap.print()
         # encode data
         pass
