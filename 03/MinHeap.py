@@ -39,8 +39,16 @@ class MinHeap:
         while self.container[pointer].parentIndex!=None and (self.container[pointer].value < self.container[pointer].parent.value):
             pointer = self.compareandswap(pointer)
         self.current += 1
+
+    #Needs optimization. Currently using this
     def pop(self):
-        print("Pop")
+        retval = self.container[0]
+        tempHeap = MinHeap(len(self.container))
+        loopcontainer = self.container[1:len(self.container)]
+        for ele in loopcontainer:
+            tempHeap.push(ele)
+        self.container = tempHeap.container
+        return retval
 
     def compareandswap(self, elementindex):
         cachechild = self.container[elementindex]
@@ -104,4 +112,7 @@ if __name__ == "__main__":
     for i in input:
         node = Node("Key"+str(i),i)
         minheap.push(node)
+    minheap.print()
+    print("Going to POP")
+    minheap.pop()
     minheap.print()
