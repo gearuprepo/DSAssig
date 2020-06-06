@@ -43,13 +43,14 @@ class MinHeap:
     def pop(self):
         print("Pop")
         retval = self.container[0]
-        tempHeap = MinHeap(len(self.container)-1)
+        tempHeap = MinHeap(len(self.container))
         loopcontainer = self.container[1:len(self.container)]
         for ele in loopcontainer:
             if ele!=None:
                 newnode = Node(ele.key,ele.value)
                 tempHeap.push(newnode)
         self.container = tempHeap.container
+        self.current -= 1
         return retval
 
     def compareandswap(self, elementindex):
@@ -116,5 +117,5 @@ if __name__ == "__main__":
         minheap.push(node)
     minheap.print()
     print("Going to POP")
-    minheap.pop()
+    print(minheap.pop())
     minheap.print()

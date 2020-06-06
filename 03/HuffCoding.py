@@ -3,31 +3,60 @@ import sys
 sys.path.append(".")
 from MinHeap import MinHeap
 from MinHeap import Node
+
 class HuffCode:
     def __init__(self):
         self.freqmap = dict()
+        self.treedict = dict()
 
-    def huffman_encoding(this,data):
+    def huffman_encoding(self,data):
         print(data)
         # Construct Frequency map -> O(n)
         for char in data:
-            this.freqmap[char] = this.freqmap.get(char, 0) + 1
-        print(this.freqmap)
+            self.freqmap[char] = self.freqmap.get(char, 0) + 1
+        print(self.freqmap)
 
         # Construct priority queue for frequency map
-        minheap = MinHeap(len(this.freqmap))
-        for ele in this.freqmap:
-            minheap.push(Node(str(ele),str(this.freqmap.get(ele))))
+        minheap = MinHeap(len(self.freqmap))
+        for ele in self.freqmap:
+            minheap.push(Node(str(ele),str(self.freqmap.get(ele))))
         minheap.print()
 
         # Encode tree process
         size = len(minheap.container)
         while size>0:
-            minheap.pop()
             size = len(minheap.container)
-            minheap.print()
+            ele1 = minheap.pop()
+            ele2 = minheap.pop()
+            sumfreq = ele1.value + ele2.value
+            concat = ele1.key + ele2.key
+            minheap.push(Node(concat,sumfreq))
+            self.updatetreedict(ele1,ele2)
+            size = len(minheap.container)
+
         # encode data
         pass
+
+    def updatetreedict(self,e1,e2):
+        n1 = self.treedict.get(e1.key)
+        if n1 == None:
+            n1 = Node(e1.key,e1.value)
+        else:
+            self.treedict.pop(e1.key)
+        
+        n2 = self.treedict.get(e2.key)
+        if n2 == None:
+            n2 = Node(e2.key,e2.value)
+        else:
+            self.treedict.pop(e2.key)
+        
+        sumfreq = n1.value + n2.value
+        concat = n1.key + n2.key
+        treenode = Node(concat,sumfreq)
+        treenode.left = n1
+        treenode.right = n2
+        self.treedict[concat] = treenode
+    
 
     def huffman_decoding(data,tree):
         print(data)
