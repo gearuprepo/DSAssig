@@ -21,7 +21,7 @@ class BlockChain:
       
       def get_tail(self):
             return self.tail
-      
+      # O(n) = 1
       def push(self,node):
             if self.head == None:
                   self.head = node
