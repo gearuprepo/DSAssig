@@ -35,10 +35,13 @@ class HuffCode:
             size = minheap.size()
         print(list(self.treedict)[0])
         treedictcore = self.treedict[list(self.treedict)[0]]
+        
         # form coding map
-        cha = 'T'
-        hcode = ''
-        print(self.findcode(treedictcore,cha,hcode))
+        for key in self.freqmap:
+            cha = key
+            hcode = ''
+            hcode = (self.findcode(treedictcore,cha,hcode))
+            self.codemap[key] = hcode
         pass
 
     def findcode(self,tree,cha,hcode):
