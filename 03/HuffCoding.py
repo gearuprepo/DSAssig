@@ -8,6 +8,7 @@ class HuffCode:
     def __init__(self):
         self.freqmap = dict()
         self.treedict = dict()
+        self.codemap = dict()
 
     def huffman_encoding(self,data):
         print(data)
@@ -20,7 +21,7 @@ class HuffCode:
         minheap = MinHeap(len(self.freqmap))
         for ele in self.freqmap:
             minheap.push(Node(str(ele),str(self.freqmap.get(ele))))
-        minheap.print()
+        minheap.print() 
 
         # Encode tree process
         size = minheap.size()
@@ -32,9 +33,25 @@ class HuffCode:
             minheap.push(Node(concat,sumfreq))
             self.updatetreedict(ele1,ele2)
             size = minheap.size()
-        # encode data
-        print("p")
+        print(list(self.treedict)[0])
+        treedictcore = self.treedict[list(self.treedict)[0]]
+        # form coding map
+        cha = 'T'
+        hcode = ''
+        print(self.findcode(treedictcore,cha,hcode))
         pass
+
+    def findcode(self,tree,cha,hcode):
+        print(tree.key)
+        if cha in tree.key:
+            if len(tree.key) == 1:
+                return hcode,tree
+            else:
+                if cha in tree.left.key:
+                    return self.findcode(tree.left,cha,hcode+'0')
+                if cha in tree.right.key:
+                    return self.findcode(tree.right,cha,hcode+'1')
+        return hcode,tree
 
     def updatetreedict(self,e1,e2):
         n1 = self.treedict.get(e1.key)
