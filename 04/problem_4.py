@@ -23,6 +23,7 @@ class Group(object):
     def get_name(self):
         return self.name
 
+#O(n) = nlogn
 def is_user_in_group(user, group):
     """
         Return True if user is in the group, False otherwise.
