@@ -16,7 +16,6 @@ class HuffCode:
     def huffman_encoding(self,data):
         print("---Start huffman coding------")
         print(data)
-        self.reset()
         # Construct Frequency map -> O(n)
         for char in data:
             self.freqmap[char] = self.freqmap.get(char, 0) + 1
@@ -50,8 +49,9 @@ class HuffCode:
         hestring = ''
         for ch in data:
             hestring = hestring + self.codemap[ch]
-        print(hestring)
-        return hestring
+        
+        rettree = self.treedict[list(self.treedict)[0]]
+        return hestring,rettree
 
     def findcode(self,tree,cha,hcode):
         if cha in tree.key:
@@ -85,21 +85,42 @@ class HuffCode:
         self.treedict[concat] = treenode
     
 
-    def huffman_decoding(data,tree):
+    def huffman_decoding(self,data,tree):
+        print("---Start huffman de-coding------")
         print(data)
+        byte = data
+        retstring = ''
+        while len(byte)>0:
+            cnt = 0
+            bound,tempretstring = self.traverse(byte,tree,cnt)
+            byte = byte[bound-1:len(byte)]
+            retstring += tempretstring
+            print(retstring)
+            #print(bit)
+        print(retstring)
         pass
+    
+    def traverse(self,byte,tree,cnt):
+        cnt += 1
+        if len(tree.key) == 1:
+            return cnt,tree.key
+        else:
+            bit = byte[0]
+            byte = byte[1:len(byte)]
+            if bit =='0':
+                return self.traverse(byte,tree.left,cnt)
+            else:
+                return self.traverse(byte,tree.right,cnt)  
 
+    
 
 a_great_sentence = "The bird is the word"
 print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
 print("The content of the data is: {}\n".format(a_great_sentence))
-hcode = HuffCode()
-#encoded_data, tree = \
-hcode.huffman_encoding(a_great_sentence)
-#print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-#print ("The content of the encoded data is: {}\n".format(encoded_data))
-
-    #decoded_data = huffcode.huffman_decoding(encoded_data, tree)
-
-    #print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    #print ("The content of the encoded data is: {}\n".format(decoded_data))
+huffcode = HuffCode()
+encoded_data, tree = huffcode.huffman_encoding(a_great_sentence)
+print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+print ("The content of the encoded data is: {}\n".format(encoded_data))
+decoded_data = huffcode.huffman_decoding(encoded_data, tree)
+#print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+#print ("The content of the encoded data is: {}\n".format(decoded_data))
