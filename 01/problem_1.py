@@ -14,7 +14,7 @@ class LRU_Cache:
         self.master_q = []
 
     def set(self, key, value):
-        # Implement LRU Start
+        # Implement LRU Start, Incase of cache full, delete LRU O(n) = n
         if self.num_entries > len(self.bucket_array) - 1:
             to_be_deleted = self.master_q[0]
             self.delete(to_be_deleted)
