@@ -13,23 +13,24 @@ class HuffCode:
     def __init__(self):
         self.reset()
 
+    #O(n) = n^2 + 4n
     def huffman_encoding(self,data):
         print("---Start huffman coding------")
         print(data)
-        # Construct Frequency map -> O(n)
+        # Construct Frequency map -> O(n)=n
         for char in data:
             self.freqmap[char] = self.freqmap.get(char, 0) + 1
 
-        # Construct priority queue for frequency map
+        # Construct priority queue for frequency map -> O(n)=n
         minheap = MinHeap(len(self.freqmap))
         for ele in self.freqmap:
             minheap.push(Node(str(ele),str(self.freqmap.get(ele))))
 
-        # Encode tree process
+        # Encode tree process -> O(n) = n^2 + 2n
         size = minheap.size()
-        while size>1:
-            ele1 = minheap.pop()
-            ele2 = minheap.pop()
+        while size>1: # n^2
+            ele1 = minheap.pop() #n
+            ele2 = minheap.pop() #n
             sumfreq = ele1.value + ele2.value
             concat = ele1.key + ele2.key
             minheap.push(Node(concat,sumfreq))
@@ -38,7 +39,7 @@ class HuffCode:
         treedictcore = self.treedict[list(self.treedict)[0]]
         
         # form coding map
-        for key in self.freqmap:
+        for key in self.freqmap: #n
             cha = key
             hcode = ''
             hcode = (self.findcode(treedictcore,cha,hcode)[0])
@@ -84,7 +85,7 @@ class HuffCode:
         treenode.right = n2
         self.treedict[concat] = treenode
     
-
+    #O(n) = nlogn
     def huffman_decoding(self,data,tree):
         print("---Start huffman de-coding------")
         print(data)
