@@ -52,6 +52,9 @@ class MinHeap:
         self.container = tempHeap.container
         self.current -= 1
         return retval
+    
+    def size(self):
+        return len(list(filter(None,self.container)))
 
     def compareandswap(self, elementindex):
         cachechild = self.container[elementindex]

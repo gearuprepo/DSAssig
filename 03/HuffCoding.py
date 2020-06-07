@@ -23,18 +23,17 @@ class HuffCode:
         minheap.print()
 
         # Encode tree process
-        size = len(minheap.container)
-        while size>0:
-            size = len(minheap.container)
+        size = minheap.size()
+        while size>1:
             ele1 = minheap.pop()
             ele2 = minheap.pop()
             sumfreq = ele1.value + ele2.value
             concat = ele1.key + ele2.key
             minheap.push(Node(concat,sumfreq))
             self.updatetreedict(ele1,ele2)
-            size = len(minheap.container)
-
+            size = minheap.size()
         # encode data
+        print("p")
         pass
 
     def updatetreedict(self,e1,e2):
@@ -61,14 +60,6 @@ class HuffCode:
     def huffman_decoding(data,tree):
         print(data)
         pass
-
-
-    def encode_tree_process():
-        print("In Core process")
-        # find 2 min elements from priority Queues
-        # Remove 2 elements from priority queue
-        # Merge elements and create a new node
-        # reinsert new element to PQ
 
 
 a_great_sentence = "The bird is the word"
