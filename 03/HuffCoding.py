@@ -111,7 +111,9 @@ class HuffCode:
 
     
 
-a_great_sentence = "The bird is the word"
+#a_great_sentence = "The bird is the word"
+a_great_sentence = "Testing Huffman's coding"
+
 print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
 print("The content of the data is: {}\n".format(a_great_sentence))
 huffcode = HuffCode()
