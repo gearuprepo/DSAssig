@@ -38,7 +38,7 @@ class HuffCode:
             size = minheap.size()
         treedictcore = self.treedict[list(self.treedict)[0]]
         
-        # form coding map
+        # form coding map O(n) = n
         for key in self.freqmap: #n
             cha = key
             hcode = ''
