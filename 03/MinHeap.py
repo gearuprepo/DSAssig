@@ -41,7 +41,6 @@ class MinHeap:
 
     #Needs optimization. Currently using this
     def pop(self):
-        print("Pop")
         retval = self.container[0]
         tempHeap = MinHeap(len(self.container))
         loopcontainer = self.container[1:len(self.container)]

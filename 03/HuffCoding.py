@@ -5,23 +5,26 @@ from MinHeap import MinHeap
 from MinHeap import Node
 
 class HuffCode:
-    def __init__(self):
+    def reset(self):
         self.freqmap = dict()
         self.treedict = dict()
         self.codemap = dict()
 
+    def __init__(self):
+        self.reset()
+
     def huffman_encoding(self,data):
+        print("---Start huffman coding------")
         print(data)
+        self.reset()
         # Construct Frequency map -> O(n)
         for char in data:
             self.freqmap[char] = self.freqmap.get(char, 0) + 1
-        print(self.freqmap)
 
         # Construct priority queue for frequency map
         minheap = MinHeap(len(self.freqmap))
         for ele in self.freqmap:
             minheap.push(Node(str(ele),str(self.freqmap.get(ele))))
-        minheap.print() 
 
         # Encode tree process
         size = minheap.size()
@@ -33,19 +36,24 @@ class HuffCode:
             minheap.push(Node(concat,sumfreq))
             self.updatetreedict(ele1,ele2)
             size = minheap.size()
-        print(list(self.treedict)[0])
         treedictcore = self.treedict[list(self.treedict)[0]]
         
         # form coding map
         for key in self.freqmap:
             cha = key
             hcode = ''
-            hcode = (self.findcode(treedictcore,cha,hcode))
+            hcode = (self.findcode(treedictcore,cha,hcode)[0])
             self.codemap[key] = hcode
-        pass
+        
+
+        # Code the input string
+        hestring = ''
+        for ch in data:
+            hestring = hestring + self.codemap[ch]
+        print(hestring)
+        return hestring
 
     def findcode(self,tree,cha,hcode):
-        print(tree.key)
         if cha in tree.key:
             if len(tree.key) == 1:
                 return hcode,tree
