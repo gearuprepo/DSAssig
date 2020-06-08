@@ -4,7 +4,7 @@ The code uses recursion to loop through the folders and sub folders and lists do
 
 n is the number of folders and sub folders
 
-> * Time O(n)  = n [traversal through all the folders and sub folders using recursion.]
+> * Time O(n)  = nlogn [traversal through all the folders and sub folders using recursion.]
 > * Space O(n) = n [file names are stored to ls_files variable]
 
 Call Stack:
