@@ -48,14 +48,14 @@ cache.set(1,1)
 cache.set(2,2)
 print(cache.get(2))
 
-#TC2 - Size = 0
+#TC3 - Size = 0
 print("Test case 3")
 cache = LRU_Cache(0)
 cache.set(1,1)
 cache.set(2,2)
 print(cache.get(2))
 
-#TC2 - Size = Null
+#TC4 - Size = Null
 print("Test case 4")
 cache = LRU_Cache()
 cache.set(1,1)
