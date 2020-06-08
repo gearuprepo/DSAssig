@@ -75,6 +75,7 @@ def intersection(llist_1, llist_2):
         val = udict.get(node2.value)
         if val != None:
             retList.append(node2.value)
+            udict.pop(val)
         node2 = node2.next
     return retList
 
