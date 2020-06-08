@@ -18,7 +18,6 @@ class HuffCode:
         if len(data) == 0:
             raise Exception("No Data to encode") 
         print("---Start huffman coding------")
-        print(data)
         # Construct Frequency map -> O(n)=n
         for char in data:
             self.freqmap[char] = self.freqmap.get(char, 0) + 1
@@ -96,7 +95,6 @@ class HuffCode:
     #O(n) = nlogn
     def huffman_decoding(self,data,tree):
         print("---Start huffman de-coding------")
-        print(data)
         if len(data) == 0:
             raise Exception("No Data to encode") 
         byte = data
@@ -130,9 +128,49 @@ class HuffCode:
     
 
 #a_great_sentence = "The bird is the word"
-#a_great_sentence = "Testing Huffman's coding"
+#Test case 2
+print("Test case 1")
 a_great_sentence = "T"
+print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+print("The content of the data is: {}\n".format(a_great_sentence))
+huffcode = HuffCode()
+encoded_data, tree = huffcode.huffman_encoding(a_great_sentence)
+print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+print ("The content of the encoded data is: {}\n".format(encoded_data))
+decoded_data = huffcode.huffman_decoding(encoded_data, tree)
+print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+print ("The content of the encoded data is: {}\n".format(decoded_data))
 
+#Test case 2
+print("Test case 2")
+a_great_sentence = "Testing Huffman's coding"
+print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+print("The content of the data is: {}\n".format(a_great_sentence))
+huffcode = HuffCode()
+encoded_data, tree = huffcode.huffman_encoding(a_great_sentence)
+print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+print ("The content of the encoded data is: {}\n".format(encoded_data))
+decoded_data = huffcode.huffman_decoding(encoded_data, tree)
+print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+#Test case 3
+print("Test case 3")
+a_great_sentence = "AAAAAAA"
+print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+print("The content of the data is: {}\n".format(a_great_sentence))
+huffcode = HuffCode()
+encoded_data, tree = huffcode.huffman_encoding(a_great_sentence)
+print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+print ("The content of the encoded data is: {}\n".format(encoded_data))
+decoded_data = huffcode.huffman_decoding(encoded_data, tree)
+print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+print ("The content of the encoded data is: {}\n".format(decoded_data))
+
+
+#Test case 4
+print("Test case 4")
+a_great_sentence = ""
 print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
 print("The content of the data is: {}\n".format(a_great_sentence))
 huffcode = HuffCode()
