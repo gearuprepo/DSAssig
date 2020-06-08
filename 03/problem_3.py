@@ -15,6 +15,8 @@ class HuffCode:
 
     #O(n) = n^2 + 4n
     def huffman_encoding(self,data):
+        if len(data) == 0:
+            raise Exception("No Data to encode") 
         print("---Start huffman coding------")
         print(data)
         # Construct Frequency map -> O(n)=n
@@ -28,6 +30,10 @@ class HuffCode:
 
         # Encode tree process -> O(n) = n^2 + 2n
         size = minheap.size()
+        #Fix for boundary conditions.
+        if size == 1:
+            ele1 = minheap.pop()
+            self.treedict[ele1.key] = ele1          
         while size>1: # n^2
             ele1 = minheap.pop() #n
             ele2 = minheap.pop() #n
@@ -42,6 +48,8 @@ class HuffCode:
         for key in self.freqmap: #n
             cha = key
             hcode = ''
+            if len(self.freqmap) == 1:
+                hcode = '0'
             hcode = (self.findcode(treedictcore,cha,hcode)[0])
             self.codemap[key] = hcode
         
@@ -89,22 +97,31 @@ class HuffCode:
     def huffman_decoding(self,data,tree):
         print("---Start huffman de-coding------")
         print(data)
+        if len(data) == 0:
+            raise Exception("No Data to encode") 
         byte = data
         retstring = ''
+        #For fixing boundary condition issues
+        singlenodeflag = False
+        if tree.left == None and tree.right == None:
+            singlenodeflag = True
         while len(byte)>0:
             cnt = 0
             bound,tempretstring = self.traverse(byte,tree,cnt)
-            byte = byte[bound-1:len(byte)]
+            if singlenodeflag:
+                bound +=1
+            byte = byte[bound:len(byte)]
             retstring += tempretstring
         return retstring
     
     def traverse(self,byte,tree,cnt):
-        cnt += 1
+        
         if len(tree.key) == 1:
             return cnt,tree.key
         else:
             bit = byte[0]
             byte = byte[1:len(byte)]
+            cnt += 1
             if bit =='0':
                 return self.traverse(byte,tree.left,cnt)
             else:
@@ -113,7 +130,8 @@ class HuffCode:
     
 
 #a_great_sentence = "The bird is the word"
-a_great_sentence = "Testing Huffman's coding"
+#a_great_sentence = "Testing Huffman's coding"
+a_great_sentence = ""
 
 print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
 print("The content of the data is: {}\n".format(a_great_sentence))
