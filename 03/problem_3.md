@@ -10,3 +10,7 @@ The implementation is using minheap.
 > * Code the input string O(n) = n
 
 * huffman_decoding - O(n) = nlogn
+
+Review Comment Fixes
+--------------------
+1. Boundary condition issues fixed
